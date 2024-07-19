@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.lbi.mapper.BoardMapper;
 import com.lbi.model.BoardVO;
+import com.lbi.model.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -32,6 +33,24 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int modify(BoardVO board) {
 		return mapper.modify(board);
+	}
+
+	@Override
+	public int delete(int bno) {
+		return mapper.delete(bno);
+	}
+     
+	//°Ô½ÃÆÇ ÆäÀÌÂ¡ Àû¿ë
+	@Override
+	public List<BoardVO> getListPaging(Criteria cri) {
+		return mapper.getListPaging(cri);
+	}
+    
+	//°Ô½Ã¹° ÃÑ °¹¼ö
+	@Override
+	public int getTotal(Criteria cri) {
+		
+		return mapper.getTotal(cri);
 	}
 	
 }

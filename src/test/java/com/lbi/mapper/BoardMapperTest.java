@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lbi.model.BoardVO;
+import com.lbi.model.Criteria;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class BoardMapperTest {
@@ -19,57 +20,19 @@ public class BoardMapperTest {
 	private BoardMapper mapper;
     
 	
-	/* @Test
-	public void testEnroll() {
-		BoardVO vo = new BoardVO();
-		vo.setTitle("mapper test");
-		vo.setContent("mapper test");
-		vo.setWriter("mapper test");
-		mapper.enroll(vo); 
 	
-	} */
-	
-  //	게시판 목록테스트
+	//게시판 페이징 적용 테스트
 	@Test
-	public void testGetList() {
+	public void testGetListPageing() {
 		
-		List list = mapper.getList();
-		/* 일반적 for문 */
-		for(int i =0; i<list.size();i++) {
-			log.info(""+ list.get(i));
+		Criteria cri = new Criteria();
+			
+			List list = mapper.getListPaging(cri);
+			
+			list.forEach(board -> log.info(""+board));
 		}
 		
-		/* foreach문(향상된 for문) */
-		for(Object a :list) {
-			log.info(""+ a);
-		}
 		
-		/* foreach문 & 람다식 */
-		list.forEach(board -> log.info(""+board));
 	}
 	
-	//게시판 조회
-	@Test
-	public void testGetPage() {
-		// 실제조회하는 페이지
-		int bno = 8;
-		
-		log.info("" + mapper.getPage(bno));
-	}
-	
-	
-	//게시판 수정
-	@Test
-	public void testModify() {
-		
-		BoardVO board = new BoardVO();
-		board.setBno(48);
-		board.setTitle("수정제목");
-		board.setContent("수정내용");
-		
-		int result = mapper.modify(board);
-		log.info("result: " + result);
-	}
-	
-	
-}
+

@@ -1,5 +1,7 @@
 package com.lbi.service;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -10,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 import com.lbi.model.BoardVO;
-
+import com.lbi.model.Criteria;
 import com.lbi.service.BoardService;
 
 
@@ -23,15 +25,17 @@ public class BoardServiceTest {
 	@Autowired
 	private BoardService service;
 	
-	
-	//게시판 목록 테스트
 	@Test
-	public void testGetList() {
-		 
-		service.getList().forEach(board -> log.info("" + board));
-	}
-	
+	public void testGetListPaging() {
 		
+		Criteria cri = new Criteria();
+		
+		List list = service.getListPaging(cri);
+		
+		list.forEach(board -> log.info(""+board));
+	}
+
+	
 	}
 	
 	
